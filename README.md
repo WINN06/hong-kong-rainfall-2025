@@ -1,34 +1,25 @@
-# The phenomenon
+# Hong Kong Rainfall, 2025
 
-<!-- This is the SD5913 assignment 2 template. Everything in this file is yours to
-replace, and the check counts words: comments like this one are not words, so
-delete each one as you write. Start with the heading: name the phenomenon.
-
-Then, in this order, at least 150 words in total.
-
-New to folders, paths, or the files here whose names start with a dot? Read
-https://github.com/sd5913/pfad/blob/2026/reference/files.md first. Ten minutes. -->
-
-![what the picture is](out/plot.png)
+![A calendar heatmap of daily rainfall in Hong Kong during 2025](out/hong-kong-rainfall-2025.png)
 
 ## The phenomenon
 
-<!-- What goes up and down, and why you looked at it. -->
+Rainfall in Hong Kong is strongly seasonal, but an annual total alone cannot show whether the water arrived steadily or in a few intense events. This project looks at daily precipitation during 2025 and asks a simple question: how was the year’s rain distributed across individual days and months?
 
 ## The source
 
-<!-- A link to the page or endpoint the file came from, and one line on what is in
-the file: how many rows, what a row means, what the units are. -->
+The raw data comes from the [Open-Meteo Historical Weather API](https://open-meteo.com/en/docs/historical-weather-api) for the coordinates 22.3193°N, 114.1694°E. Open-Meteo describes this historical product as reanalysis: it combines observations with weather models to estimate conditions on a regular grid. 
 
 ## What the picture shows
 
-<!-- Two or three sentences. Including what it hides: every transformation throws
-something away, and naming what yours threw away is the easiest way to sound like
-you know what you did. -->
+Each heatmap square represents one day, arranged by month and day of month. Darker blue means more rain, while the bars on the right compare monthly totals. The orange outline identifies the wettest day. The picture shows whether rainfall was spread through the year or concentrated in short bursts.
+
+This transformation hides hourly timing and differences between districts: one daily value at one coordinate cannot show when rain fell during the day or how a storm varied across Hong Kong. The nonlinear colour scale also makes light rain visible, but it compresses the visual difference between the largest values; the monthly bars retain their linear scale.
 
 ## Run it
 
-```
+```text
 uv run fetch.py
 uv run plot.py
 ```
+
