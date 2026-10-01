@@ -106,22 +106,26 @@ def draw(records, unit, output_path):
     for spine in heat.spines.values():
         spine.set_visible(False)
 
+    for rank, (heavy_day, _) in enumerate(top_five, start=1):
+        heavy_x = heavy_day.day - 1
+        heavy_y = heavy_day.month - 1
+        heat.add_patch(
+            Rectangle(
+                (heavy_x - 0.48, heavy_y - 0.48),
+                0.96,
+                0.96,
+                fill=False,
+                edgecolor=ACCENT,
+                linewidth=2.5 if rank == 1 else 1.8,
+            )
+        )
+
     wettest_day, wettest_amount = wettest
     x = wettest_day.day - 1
     y = wettest_day.month - 1
-    heat.add_patch(
-        Rectangle(
-            (x - 0.48, y - 0.48),
-            0.96,
-            0.96,
-            fill=False,
-            edgecolor=ACCENT,
-            linewidth=2.5,
-        )
-    )
     label_offset = (-105, -42) if wettest_day.day > 20 else (35, -42)
     heat.annotate(
-        f"wettest day\n{wettest_day:%d %b} · {wettest_amount:.1f} {unit}",
+        f"wettest of five\n{wettest_day:%d %b} · {wettest_amount:.1f} {unit}",
         xy=(x, y),
         xytext=label_offset,
         textcoords="offset points",
@@ -178,7 +182,7 @@ def draw(records, unit, output_path):
     fig.text(
         0.08,
         0.055,
-        "Each square is one day. Blank grey squares are dates that do not exist in that month.",
+        "Each square is one day. Orange outlines mark the five wettest days; grey squares are dates that do not exist.",
         color=MUTED,
         fontsize=9,
     )
